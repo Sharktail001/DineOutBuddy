@@ -1,0 +1,19 @@
+# Data files
+data/
+
+# Environment variables (important - never commit these)
+.env
+.env.local
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
