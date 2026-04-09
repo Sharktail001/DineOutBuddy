@@ -1,0 +1,4 @@
+asyncpg
+python-dotenv
+pytest
+pytest-asyncio

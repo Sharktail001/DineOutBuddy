@@ -11,6 +11,12 @@ __pycache__/
 .venv/
 venv/
 
+# pytest
+.pytest_cache/
+pytest-cache-files-*/
+**/__pycache__/
+*.pyc
+
 # VS Code
 .vscode/
 
@@ -18,5 +24,6 @@ venv/
 .DS_Store
 Thumbs.db
 
-# Markdowns
-*.md
+# Specific Markdowns
+AGENTS.md
+CHANGELOG.md
