@@ -248,6 +248,9 @@ def load_restaurant_rows(
                 "google_place_id": (row.get("places_id") or "").strip() or None,
                 "yelp_id": None,
                 "ubereats_id": None,
+                "website": (row.get("website") or "").strip() or None,
+                "phone": (row.get("phone_number") or "").strip() or None,
+                "hours": None,
                 "rating_score": parse_float(row.get("score")),
                 "rating_count": parse_int(row.get("ratings")),
                 "data_quality_score": 0.0,
@@ -299,6 +302,9 @@ def scan_menu_relationships(
                         "google_place_id": None,
                         "yelp_id": None,
                         "ubereats_id": external_restaurant_id,
+                        "website": None,
+                        "phone": None,
+                        "hours": None,
                         "data_quality_score": 0.0,
                         "last_verified_at": now,
                         "needs_refresh": False,
@@ -328,6 +334,9 @@ def restaurant_tuple(restaurant: dict) -> tuple:
         restaurant["google_place_id"],
         restaurant["yelp_id"],
         restaurant["ubereats_id"],
+        restaurant.get("website"),
+        restaurant.get("phone"),
+        restaurant.get("hours"),
         restaurant.get("rating_score"),
         restaurant.get("rating_count"),
         restaurant["data_quality_score"],
@@ -419,12 +428,13 @@ async def upsert_restaurants(connection, restaurant_rows: list[tuple], stats: Im
     query = """
         INSERT INTO restaurants (
             id, name, address, lat, lng, city, zip, price_level,
-            google_place_id, yelp_id, ubereats_id, rating_score, rating_count,
-            data_quality_score, last_verified_at, needs_refresh, created_at, updated_at
+            google_place_id, yelp_id, ubereats_id, website, phone, hours,
+            rating_score, rating_count, data_quality_score, last_verified_at,
+            needs_refresh, created_at, updated_at
         ) VALUES (
             $1, $2, $3, $4, $5, $6, $7, $8,
-            $9, $10, $11, $12, $13,
-            $14, $15, $16, $17, $18
+            $9, $10, $11, $12, $13, $14,
+            $15, $16, $17, $18, $19, $20, $21
         )
         ON CONFLICT (id) DO UPDATE SET
             name = EXCLUDED.name,
@@ -437,6 +447,9 @@ async def upsert_restaurants(connection, restaurant_rows: list[tuple], stats: Im
             google_place_id = EXCLUDED.google_place_id,
             yelp_id = EXCLUDED.yelp_id,
             ubereats_id = EXCLUDED.ubereats_id,
+            website = EXCLUDED.website,
+            phone = EXCLUDED.phone,
+            hours = EXCLUDED.hours,
             rating_score = EXCLUDED.rating_score,
             rating_count = EXCLUDED.rating_count,
             data_quality_score = EXCLUDED.data_quality_score,
