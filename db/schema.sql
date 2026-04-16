@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS restaurants (
     price_level INT,
     google_place_id TEXT,
     yelp_id TEXT,
+    yelp_url TEXT,
     ubereats_id TEXT,
     website TEXT,
     phone TEXT,
