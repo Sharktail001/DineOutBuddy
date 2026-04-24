@@ -1,5 +1,7 @@
 asyncpg
+beautifulsoup4
 httpx
+playwright
 python-dotenv
 pytest
 pytest-asyncio
