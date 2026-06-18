@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-ChildItem \"C:\\\\Program Files\\\\PostgreSQL\\\\17\" -Force | ForEach-Object { $_.Name })",
+      "PowerShell($r = Invoke-WebRequest \"https://api.github.com/repos/pgvector/pgvector/tags\" -Headers @{\"User-Agent\"=\"PowerShell/5.1\"} -UseBasicParsing; \\($r.Content | ConvertFrom-Json\\)[0].name)",
+      "PowerShell($r = Invoke-WebRequest \"https://api.github.com/repos/pgvector/pgvector/releases/tags/v0.8.2\" -Headers @{\"User-Agent\"=\"PowerShell/5.1\"} -UseBasicParsing; $data = $r.Content | ConvertFrom-Json; $data.assets | Select-Object name, browser_download_url)",
+      "PowerShell(winget search *)",
+      "Bash(python *)"
+    ]
+  }
+}

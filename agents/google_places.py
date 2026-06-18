@@ -446,11 +446,11 @@ class GooglePlacesAgent:
         if not places:
             return
 
-        existing = await self.fetch_existing_restaurants(connection, [place["id"] for place in places])
+        valid_places = [place for place in places if place.get("id")]
+        existing = await self.fetch_existing_restaurants(connection, [place["id"] for place in valid_places])
         restaurant_models = [
             self.place_to_record(place, existing_id=existing.get(place["id"], {}).get("id"))
-            for place in places
-            if place.get("id")
+            for place in valid_places
         ]
         restaurant_ids = [restaurant["id"] for restaurant in restaurant_models]
         menu_presence = await self.fetch_menu_presence(connection, restaurant_ids)

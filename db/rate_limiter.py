@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import os
 from dataclasses import dataclass
-from datetime import date
+from datetime import date, datetime, timezone
 from typing import Mapping
 
 import asyncpg
@@ -59,7 +59,7 @@ async def count_calls_today(
           AND status IN ('success', 'partial')
         """,
         source,
-        on_date or date.today(),
+        on_date or datetime.now(timezone.utc).date(),
     )
 
 

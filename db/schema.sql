@@ -18,6 +18,8 @@ CREATE TABLE IF NOT EXISTS restaurants (
     hours TEXT,
     rating_score DOUBLE PRECISION,
     rating_count INT,
+    spice_level_estimate INT,
+    cuisine_detail TEXT,
     data_quality_score DOUBLE PRECISION DEFAULT 0,
     last_verified_at TIMESTAMP,
     needs_refresh BOOLEAN DEFAULT FALSE,

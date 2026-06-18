@@ -502,6 +502,10 @@ async def run_cli(args: argparse.Namespace) -> YelpEnrichmentStats:
 
 
 async def main() -> None:
+    raise RuntimeError(
+        "Yelp enricher is temporarily disabled — free tier expired. "
+        "Re-enable in AGENTS.md when ready."
+    )
     parser = build_parser()
     args = parser.parse_args()
     try:

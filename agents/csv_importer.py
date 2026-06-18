@@ -624,37 +624,43 @@ async def import_csv_data(
     pool = await create_pool()
     try:
         async with pool.acquire() as connection:
+            if apply_schema_first:
+                await apply_schema(connection)
+            if truncate_existing:
+                await truncate_import_tables(connection)
+
+        restaurant_rows, restaurant_lookup = load_restaurant_rows(
+            resolved_restaurant_csv,
+            now=now,
+        )
+        placeholder_restaurants = scan_menu_relationships(
+            resolved_menu_csv,
+            restaurant_rows=restaurant_rows,
+            restaurant_lookup=restaurant_lookup,
+            now=now,
+        )
+        finalized_restaurants, cuisine_tag_rows = finalize_restaurants(
+            restaurant_rows=restaurant_rows,
+            placeholder_restaurants=placeholder_restaurants,
+            stats=stats,
+        )
+
+        async with pool.acquire() as connection:
             async with connection.transaction():
-                if apply_schema_first:
-                    await apply_schema(connection)
-                if truncate_existing:
-                    await truncate_import_tables(connection)
-
-                restaurant_rows, restaurant_lookup = load_restaurant_rows(
-                    resolved_restaurant_csv,
-                    now=now,
-                )
-                placeholder_restaurants = scan_menu_relationships(
-                    resolved_menu_csv,
-                    restaurant_rows=restaurant_rows,
-                    restaurant_lookup=restaurant_lookup,
-                    now=now,
-                )
-                finalized_restaurants, cuisine_tag_rows = finalize_restaurants(
-                    restaurant_rows=restaurant_rows,
-                    placeholder_restaurants=placeholder_restaurants,
-                    stats=stats,
-                )
-
                 await upsert_restaurants(connection, finalized_restaurants, stats)
-                await stream_menu_items(
-                    connection,
-                    menu_csv_path=resolved_menu_csv,
-                    restaurant_lookup=restaurant_lookup,
-                    placeholder_restaurants=placeholder_restaurants,
-                    stats=stats,
-                    now=now,
-                )
+
+        async with pool.acquire() as connection:
+            await stream_menu_items(
+                connection,
+                menu_csv_path=resolved_menu_csv,
+                restaurant_lookup=restaurant_lookup,
+                placeholder_restaurants=placeholder_restaurants,
+                stats=stats,
+                now=now,
+            )
+
+        async with pool.acquire() as connection:
+            async with connection.transaction():
                 await upsert_cuisine_tags(connection, cuisine_tag_rows, stats)
                 await log_import_run(
                     connection,
@@ -663,6 +669,7 @@ async def import_csv_data(
                     stats=stats,
                     now=now,
                 )
+
         return stats
     finally:
         await pool.close()
