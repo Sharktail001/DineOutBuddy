@@ -1,0 +1,292 @@
+.submitRow {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.submitBtn {
+  padding: 14px 48px;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(108, 92, 231, 0.4);
+}
+
+.submitBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.loading {
+  text-align: center;
+  padding: 48px;
+  color: var(--color-text-muted);
+}
+
+.spinner {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 12px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.empty {
+  text-align: center;
+  padding: 64px 24px;
+  color: var(--color-text-muted);
+}
+
+.emptyIcon {
+  font-size: 3rem;
+  margin-bottom: 12px;
+  opacity: 0.4;
+}
+
+.error {
+  text-align: center;
+  padding: 32px;
+  background: rgba(255, 82, 82, 0.1);
+  border: 1px solid rgba(255, 82, 82, 0.3);
+  border-radius: var(--radius);
+  color: var(--color-red);
+  margin-bottom: 24px;
+}
+
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+}
+
+.card:hover {
+  border-color: var(--color-border);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+.cardTop {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.scoreCircle {
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.scoreGreen {
+  background: rgba(0, 200, 83, 0.2);
+  border: 2px solid var(--color-green);
+  color: var(--color-green);
+}
+
+.scoreYellow {
+  background: rgba(255, 193, 7, 0.2);
+  border: 2px solid var(--color-yellow);
+  color: var(--color-yellow);
+}
+
+.scoreRed {
+  background: rgba(255, 82, 82, 0.2);
+  border: 2px solid var(--color-red);
+  color: var(--color-red);
+}
+
+.cardInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.cardName {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 2px;
+}
+
+.cardAddress {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: 8px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.tag {
+  padding: 2px 10px;
+  border-radius: 12px;
+  background: var(--color-surface-2);
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  text-transform: capitalize;
+}
+
+.scores {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.personScores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-border);
+}
+
+.personChip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: var(--color-surface-2);
+  font-size: 0.8rem;
+}
+
+.personAvatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.personScore {
+  font-weight: 600;
+}
+
+.menuSection {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-border);
+}
+
+.menuTitle {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: 12px;
+}
+
+.menuItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.menuItem:last-child {
+  border-bottom: none;
+}
+
+.menuItemName {
+  font-size: 0.9rem;
+  color: var(--color-text);
+}
+
+.menuItemDesc {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+.menuItemPrice {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  white-space: nowrap;
+  margin-left: 16px;
+}
+
+.menuMore {
+  text-align: center;
+  padding: 8px;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.menuLoading {
+  text-align: center;
+  padding: 16px;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+.groupAddRow {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.addPersonBtn {
+  padding: 10px 24px;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.addPersonBtn:hover:not(:disabled) {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.addPersonBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .scoreCircle {
+    width: 52px;
+    height: 52px;
+    font-size: 0.95rem;
+  }
+  .cardName {
+    font-size: 1rem;
+  }
+}

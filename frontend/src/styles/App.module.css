@@ -1,0 +1,65 @@
+.app {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 16px 64px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  margin-top: 4px;
+}
+
+.modeTabs {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 32px;
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  padding: 4px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.modeTab {
+  padding: 10px 28px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.modeTab:hover {
+  color: var(--color-text);
+}
+
+.modeTabActive {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .app {
+    padding: 16px 12px 48px;
+  }
+  .title {
+    font-size: 1.5rem;
+  }
+}
